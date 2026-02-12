@@ -45,6 +45,7 @@ When using `raw`:
 ### Prefer
 
 ```ts
+import { useFunc } from '@faasjs/func'
 import { query, transaction, useKnex } from '@faasjs/knex'
 
 export const func = useFunc(() => {
