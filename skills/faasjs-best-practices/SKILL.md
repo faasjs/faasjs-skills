@@ -1,6 +1,6 @@
 ---
 name: faasjs-best-practices
-description: FaasJS best practices - file conventions, database(knex).
+description: FaasJS best practices - file conventions, defineFunc, database(knex).
 user-invocable: false
 ---
 
@@ -13,7 +13,14 @@ See [File conventions](./file-conventions.md) for:
 - Route segments and fallback (`*.func.ts`, `index.func.ts`, `default.func.ts`)
 - Verb naming semantics and list endpoint conventions
 
+## defineFunc
+
+See [defineFunc guide](./define-func.md) for:
+- When to use `defineFunc` in `*.func.ts` files
+- How plugin config from `faas.yaml` is auto-loaded
+- A complete endpoint example with typed params
+
 ## Knex
 
 See [Knex rules](./knex.md) for:
-- Prefer query-builder methods over `knex.raw`
+- Configuring Knex via `faas.yaml` and using query-builder methods over `knex.raw`

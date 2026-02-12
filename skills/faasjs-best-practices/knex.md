@@ -35,8 +35,9 @@ When using `raw`:
 
 ## FaasJS Usage
 
-- Mount the plugin once in function setup with `useKnex()`.
+- Configure Knex in `src/faas.yaml` and let `defineFunc` auto-load plugins.
 - Use `query(...)`, `transaction(...)`, or `useKnex().query(...)` in handlers.
+- Call `useKnex()` directly only when you need a named connection instance.
 - Do not create ad-hoc `new Knex()` in application business code (tests/infrastructure code are exceptions).
 - Do not call `quit()` in request handlers.
 
@@ -44,17 +45,26 @@ When using `raw`:
 
 ### Prefer
 
+```yaml
+# src/faas.yaml
+defaults:
+  plugins:
+    knex:
+      config:
+        client: better-sqlite3
+        connection:
+          filename: ./data/app.db
+```
+
 ```ts
-import { useFunc } from '@faasjs/func'
-import { query, transaction, useKnex } from '@faasjs/knex'
+import { defineFunc } from '@faasjs/func'
+import { query, transaction } from '@faasjs/knex'
 
-export const func = useFunc(() => {
-  useKnex()
-
-  return async ({ params }) => {
+export const func = defineFunc<{ params: { userId: number } }>(
+  async ({ event }) => {
     const user = await query('users')
       .select('id', 'email')
-      .where({ id: params.userId })
+      .where({ id: event.params.userId })
       .first()
 
     if (!user) throw Error('User not found')
@@ -70,7 +80,7 @@ export const func = useFunc(() => {
         .update({ last_login_at: new Date() })
     })
   }
-})
+)
 ```
 
 ### Avoid

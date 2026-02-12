@@ -11,6 +11,7 @@ Start here. These background skills are auto-applied to prevent common mistakes.
 Core FaasJS knowledge:
 
 - [File Conventions](./skills/faasjs-best-practices/file-conventions.md)
+- [defineFunc Guide](./skills/faasjs-best-practices/define-func.md)
 - [Knex Rules](./skills/faasjs-best-practices/knex.md)
 
 ## Installation

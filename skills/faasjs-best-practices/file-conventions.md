@@ -122,13 +122,11 @@ Examples:
 `src/pages/page-a/api/submit.func.ts`:
 
 ```ts
-import { useFunc } from '@faasjs/func'
+import { defineFunc } from '@faasjs/func'
 
-export const func = useFunc(() => {
-  return async () => {
-    return {
-      accepted: true,
-    }
+export const func = defineFunc(async () => {
+  return {
+    accepted: true,
   }
 })
 ```
